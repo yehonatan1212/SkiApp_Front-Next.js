@@ -5,6 +5,7 @@ import { apiRequest } from '../lib/api';
 
 interface SkiFormProps {
   onClose: () => void;
+  onSkiAdded: () => void;
 }
 
 const SkiForm = ({ onClose }: SkiFormProps) => {

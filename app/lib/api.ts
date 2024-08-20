@@ -10,13 +10,22 @@ export const apiRequest = async (
     };
 
     if (authToken) {
-      headers['Authorization'] = `Bearer ${authToken}`;
+      headers['Authorization'] = `${authToken}`;
     }
 
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${endpoint}`, {
       method,
       headers,
       body: body ? JSON.stringify(body) : null,
+    });
+        // Delete
+    console.log('Request Details:', {
+      url: `${process.env.NEXT_PUBLIC_API_URL}${endpoint}`,
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${authToken}`
+      }
     });
 
     const data = await response.json();

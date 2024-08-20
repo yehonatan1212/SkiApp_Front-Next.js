@@ -5,7 +5,7 @@ import { apiRequest } from '../lib/api';
 import { apiConfigs } from './apiConfigs';
 
 // Set which API to call by setting this variable
-const selectedApiKey = 'login'; // Change this to 'login' or any other API key
+const selectedApiKey = 'register'; // Change this to 'login' or any other API key
 
 const TestPage = () => {
   const [responseData, setResponseData] = useState<any>(null);

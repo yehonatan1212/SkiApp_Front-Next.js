@@ -36,6 +36,12 @@ export const apiConfigs = {
     },
     authToken: null, // Set token from login
   },
+  GetAllSki: {
+    endpoint: '/Ski_gear/get_all_skis',
+    method: 'GET',
+    body: null,
+    authToken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MjQyNDc3MjQsImlhdCI6MTcyNDE2MTMxOSwic3ViIjoxfQ.aWbA7O-cIFjKDZq__8H_8KZyLhcj3xJHQXorpwSuwgQ'
+  }
   // Add more API configs as needed
 };
 
