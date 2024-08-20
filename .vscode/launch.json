@@ -8,7 +8,7 @@
             "name": "Launch user",
             "request": "launch",
             "type": "chrome",
-            "url": "http://localhost:3001/user",
+            "url": "http://localhost:3000/user",
             "webRoot": "${workspaceFolder}"
         },
         
@@ -16,14 +16,14 @@
             "name": "Launch test",
             "request": "launch",
             "type": "chrome",
-            "url": "http://localhost:3001/test",
+            "url": "http://localhost:3000/test",
             "webRoot": "${workspaceFolder}"
         },
         {
             "type": "chrome",
             "request": "launch",
             "name": "Launch Home",
-            "url": "http://localhost:3001",
+            "url": "http://localhost:3000",
             "webRoot": "${workspaceFolder}"
         }
     ]

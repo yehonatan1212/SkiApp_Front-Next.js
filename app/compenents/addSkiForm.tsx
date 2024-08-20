@@ -136,6 +136,7 @@ const SkiForm = ({ onClose }: SkiFormProps) => {
           <div className="col-span-2 flex justify-center mt-4">
             <button
               type="submit"
+              tabIndex={0} // Ensures tab navigation
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Add Ski
