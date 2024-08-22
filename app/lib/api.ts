@@ -2,7 +2,7 @@ export const apiRequest = async (
   endpoint: string,
   method: string = 'GET',
   body: any = null,
-  authToken: string | null = null
+  authToken: string | null = null,
 ) => {
   try {
     const headers: Record<string, string> = {
@@ -17,17 +17,8 @@ export const apiRequest = async (
       method,
       headers,
       body: body ? JSON.stringify(body) : null,
+      cache: "no-store"
     });
-        // Delete
-    console.log('Request Details:', {
-      url: `${process.env.NEXT_PUBLIC_API_URL}${endpoint}`,
-      method,
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `${authToken}`
-      }
-    });
-
     const data = await response.json();
     if (!response.ok) {
       throw new Error(data.message || 'Something went wrong');

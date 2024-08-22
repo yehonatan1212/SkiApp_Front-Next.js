@@ -14,7 +14,6 @@ const UserPage = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
-      console.log("Token", token)  //Delete
       router.push('/');
     } else {
       fetchSkis(token);
@@ -23,16 +22,30 @@ const UserPage = () => {
 
   const fetchSkis = async (token: string) => {
     try {
-      const response = await apiRequest('/Ski_gear/get_all_skis', 'GET', null, token);
-      const skiData = response.data; // Accessing the `data` envelope
-      setSkis(skiData);
+      const skiData = await apiRequest('/Ski_gear/get_all_skis', 'GET', null, token);
+      setSkis(skiData.data); // Ensure the `data` envelope is correctly accessed
     } catch (error) {
       console.error('Failed to fetch skis:', error);
-      console.log("-------fetchSkis ERROR---------")
-      //router.push('/');
+      router.push('/');
     }
   };
-  console.log("ski object", skis)   //Delete
+
+  const deleteSki = async (skiId: number) => {
+    const token = localStorage.getItem('token');
+    try {
+      await apiRequest(`/Ski_gear/edit/${skiId}`, 'DELETE', null, token);
+    } catch (error) {
+      console.error('Failed to delete ski:', error);
+    }
+  };
+
+  const handleSkiAdded = async () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      await fetchSkis(token); // Re-fetch the skis after a new one is added
+    }
+  };
+
   const handleAddSki = () => {
     setIsFormOpen(!isFormOpen);
   };
@@ -40,24 +53,24 @@ const UserPage = () => {
   return (
     <div className="p-4">
       <h1 className="text-3xl font-bold mb-6">Your Skis</h1>
-      <button 
-        onClick={handleAddSki} 
+      <button
+        onClick={handleAddSki}
         className="bg-blue-500 text-white px-4 py-2 rounded mb-4"
       >
         {isFormOpen ? 'Close Form' : 'Add Ski'}
       </button>
-      
+
       {isFormOpen && (
-        <AddSkiForm onClose={() => setIsFormOpen(false)} onSkiAdded={() => fetchSkis(localStorage.getItem('token')!)} />
+        <AddSkiForm onClose={() => setIsFormOpen(false)} onSkiAdded={handleSkiAdded} />
       )}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+      <div>
         {skis.map((ski) => (
-          <SkiCard key={ski.id} ski={ski} />
+          <SkiCard ski={ski} />
         ))}
       </div>
     </div>
   );
-  
 };
 
 export default UserPage;
