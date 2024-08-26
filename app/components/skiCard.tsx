@@ -11,6 +11,7 @@ import Floatation from './cardComponents/floatation';
 import ContactLength from './cardComponents/contactLength';
 import SkiSpecs from './cardComponents/skiSpecs';
 import Rating from './cardComponents/Rating';
+import DeleteButton from './cardComponents/DeleteButton';
 
 interface Ski{
   id: number;
@@ -36,33 +37,34 @@ interface Ski{
   contact_length: number;
   floatation: number;
 }
+interface skiCardProps{
+  ski: Ski;
+  onDelete: (id: number) => void;
+}
 
 
-const SkiCard: React.FC<{ ski: Ski }> = ({ ski }) => {
+const SkiCard: React.FC<skiCardProps> = ({ ski, onDelete }) => {
 
   const handleRatingChange = (newRating: number) => {
     console.log(`New rating: ${newRating}`)
     // Here you can update state or send the new rating to an API, etc.
   };
 
+  const handleDelete = () => {
+    onDelete(ski.id);
+  };
+
 
   return (
     <div className="ski-card">
       <div className="card-header">
-
-        <h2>{ski.name}</h2>
+        
+        <h2 className="text-2xl mb-6">{ski.name}</h2>
 
         <div>
           <Rating defaultRating={2} onChange={handleRatingChange} />
         </div>
 
-        <div>
-          <button
-            //onClick={() => deleteSki(ski.id) } className="text-red-500 hover:text-red-700"
-            >
-            Delete
-          </button>
-        </div>
       </div>
 
         <SkiSpecs ski={ski} />
@@ -92,6 +94,7 @@ const SkiCard: React.FC<{ ski: Ski }> = ({ ski }) => {
           <Floatation floatation={ski.floatation} />
         </div>
 
+        <DeleteButton onDelete={handleDelete} />
       </div>
     </div>
   );

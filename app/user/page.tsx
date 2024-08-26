@@ -30,7 +30,7 @@ const UserPage = () => {
     }
   };
 
-  const deleteSki = async (skiId: number) => {
+  const handleDeleteSki = async (skiId: number) => {
     const token = localStorage.getItem('token');
     try {
       await apiRequest(`/Ski_gear/edit/${skiId}`, 'DELETE', null, token);
@@ -66,7 +66,7 @@ const UserPage = () => {
 
       <div>
         {skis.map((ski) => (
-          <SkiCard ski={ski} />
+          <SkiCard ski={ski} onDelete={handleDeleteSki} />
         ))}
       </div>
     </div>
