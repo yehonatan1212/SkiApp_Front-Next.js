@@ -44,7 +44,7 @@ const RegisterPage = () => {
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
+            className="input input-bordered w-full max-w-xs"
             required
           />
         </div>
@@ -54,7 +54,7 @@ const RegisterPage = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
+            className="input input-bordered w-full max-w-xs"
             required
           />
         </div>
@@ -64,7 +64,7 @@ const RegisterPage = () => {
             type="number"
             value={height}
             onChange={(e) => setHeight(Number(e.target.value))}
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
+            className="input input-bordered w-full max-w-xs"
             required
           />
         </div>
@@ -74,7 +74,7 @@ const RegisterPage = () => {
             type="number"
             value={weight}
             onChange={(e) => setWeight(Number(e.target.value))}
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
+            className="input input-bordered w-full max-w-xs"
             required
           />
         </div>
@@ -84,16 +84,22 @@ const RegisterPage = () => {
             type="text"
             value={skiLevel}
             onChange={(e) => setSkiLevel(e.target.value)}
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
-            required
+            className="input input-bordered w-full max-w-xs"
           />
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-between">
           <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Register
+          </button>
+          <button
+            type="button"
+            onClick={() => router.push('/')}
+            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Log in
           </button>
         </div>
       </form>
