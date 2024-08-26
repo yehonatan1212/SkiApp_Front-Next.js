@@ -4,14 +4,16 @@ import { useState } from 'react';
 import styles from '../css/lineScale.module.css';
 import deleteSki from '../user/page'
 
-import HeightDifference from './cardComponents/heightdifference';
-import SkiLevelScale from './cardComponents/levelScale';
-import TerrainScale from './cardComponents/terrainScale';
-import Floatation from './cardComponents/floatation';
-import ContactLength from './cardComponents/contactLength';
-import SkiSpecs from './cardComponents/skiSpecs';
+import HeightDifference from './cardComponents/HeightDifference';
+import SkiLevelScale from './cardComponents/LevelScale';
+import TerrainScale from './cardComponents/TerrainScale';
+import Floatation from './cardComponents/Floatation';
+import ContactLength from './cardComponents/ContactLength';
+import SkiSpecs from './cardComponents/SkiSpecs';
 import Rating from './cardComponents/Rating';
 import DeleteButton from './cardComponents/DeleteButton';
+import EditButton from './cardComponents/EditButton';
+import EditSkiForm from './cardComponents/EditSkiForm';
 
 interface Ski{
   id: number;
@@ -23,13 +25,9 @@ interface Ski{
   weight: number;
   picture: string | null;
   rating: number | null;
-  camber_rocker: number;
   tip: number;
   waist: number;
   tail: number;
-  stiffness: number;
-  stability_vs_manoeuvrability: number | null;
-  short_vs_long_turns: number | null;
   on_piste_vs_off_piste: number;
   ski_level_min: number;
   ski_level_max: number;
@@ -37,13 +35,26 @@ interface Ski{
   contact_length: number;
   floatation: number;
 }
+interface NewSkiProps {
+  id: number;
+  name: string;
+  length: number;
+  radius: number;
+  weight: number;
+  tip: number;
+  waist: number;
+  tail: number;
+}
+
 interface skiCardProps{
   ski: Ski;
   onDelete: (id: number) => void;
+  onUpdate: (updatedSki: NewSkiProps) => void;
 }
 
 
-const SkiCard: React.FC<skiCardProps> = ({ ski, onDelete }) => {
+const SkiCard: React.FC<skiCardProps> = ({ ski, onDelete, onUpdate }) => {
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleRatingChange = (newRating: number) => {
     console.log(`New rating: ${newRating}`)
@@ -52,6 +63,14 @@ const SkiCard: React.FC<skiCardProps> = ({ ski, onDelete }) => {
 
   const handleDelete = () => {
     onDelete(ski.id);
+  };
+
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+  const handleSave = (updatedSki: NewSkiProps) => {
+    onUpdate(updatedSki);
+    setIsEditing(false);
   };
 
 
@@ -94,6 +113,15 @@ const SkiCard: React.FC<skiCardProps> = ({ ski, onDelete }) => {
           <Floatation floatation={ski.floatation} />
         </div>
 
+        <EditButton onEdit={handleEdit} />
+        {isEditing && (
+          <EditSkiForm
+            ski={ski}
+            onSave={handleSave}
+            onClose={() => setIsEditing(false)}
+          />
+        )}
+        
         <DeleteButton onDelete={handleDelete} />
       </div>
     </div>

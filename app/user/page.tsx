@@ -6,6 +6,17 @@ import { apiRequest } from '../lib/api';
 import AddSkiForm from '../components/addSkiForm';
 import SkiCard from '../components/skiCard';
 
+interface NewSkiProps {
+  id: number;
+  name: string;
+  length: number;
+  radius: number;
+  weight: number;
+  tip: number;
+  waist: number;
+  tail: number;
+}
+
 const UserPage = () => {
   const [skis, setSkis] = useState([]);
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -39,6 +50,15 @@ const UserPage = () => {
     }
   };
 
+  const handleUpdateSki = async (updatedSki: NewSkiProps) => {
+    const token = localStorage.getItem('token');
+    try {
+      await apiRequest(`/Ski_gear/edit/${updatedSki.id}`, 'PUT', updatedSki, token);
+    } catch (error) {
+      console.error('Failed to edit ski:', error);
+    }
+  };
+
   const handleSkiAdded = async () => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -66,7 +86,11 @@ const UserPage = () => {
 
       <div>
         {skis.map((ski) => (
-          <SkiCard ski={ski} onDelete={handleDeleteSki} />
+          <SkiCard 
+            ski={ski} 
+            onDelete={handleDeleteSki} 
+            onUpdate={handleUpdateSki}
+          />
         ))}
       </div>
     </div>
