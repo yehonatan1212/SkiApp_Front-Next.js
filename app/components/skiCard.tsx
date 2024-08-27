@@ -75,15 +75,32 @@ const SkiCard: React.FC<skiCardProps> = ({ ski, onDelete, onUpdate }) => {
 
 
   return (
-    <div className="ski-card">
-      <div className="card-header">
-        
-        <h2 className="text-2xl mb-6">{ski.name}</h2>
-
+    <div className="p-6">
+      <div className="card-header flex items-center justify-between">
         <div>
-          <Rating defaultRating={2} onChange={handleRatingChange} />
+          <h2 className="text-3xl font-medium mb-2">{ski.name}</h2>
+          <div>
+            <Rating defaultRating={2} onChange={handleRatingChange} />
+          </div>
         </div>
 
+        <div className="flex flex-col ...">
+          
+            <div><EditButton onEdit={handleEdit} /> </div>
+
+          <div className='lex flex-row ...'>
+            <div><DeleteButton onDelete={handleDelete} /> </div>
+            <div></div>
+          </div>
+        </div>
+
+        {isEditing && (
+          <EditSkiForm
+            ski={ski}
+            onSave={handleSave}
+            onClose={() => setIsEditing(false)}
+          />
+        )}
       </div>
 
         <SkiSpecs ski={ski} />
@@ -113,16 +130,7 @@ const SkiCard: React.FC<skiCardProps> = ({ ski, onDelete, onUpdate }) => {
           <Floatation floatation={ski.floatation} />
         </div>
 
-        <EditButton onEdit={handleEdit} />
-        {isEditing && (
-          <EditSkiForm
-            ski={ski}
-            onSave={handleSave}
-            onClose={() => setIsEditing(false)}
-          />
-        )}
         
-        <DeleteButton onDelete={handleDelete} />
       </div>
     </div>
   );

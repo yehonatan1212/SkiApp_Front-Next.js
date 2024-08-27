@@ -71,7 +71,7 @@ const UserPage = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="w-full mx-auto max-w-[850px] bg-white p-8 rounded-lg text-xs md:text-sm">
       <h1 className="text-3xl font-bold mb-6">Your Skis</h1>
       <button
         onClick={handleAddSki}
@@ -83,17 +83,17 @@ const UserPage = () => {
       {isFormOpen && (
         <AddSkiForm onClose={() => setIsFormOpen(false)} onSkiAdded={handleSkiAdded} />
       )}
+        <div className='p-4 rounded-lg shadow-md'>
+          {skis.map((ski) => (
+            <SkiCard 
+              ski={ski} 
+              onDelete={handleDeleteSki} 
+              onUpdate={handleUpdateSki}
+            />
+          ))}
 
-      <div>
-        {skis.map((ski) => (
-          <SkiCard 
-            ski={ski} 
-            onDelete={handleDeleteSki} 
-            onUpdate={handleUpdateSki}
-          />
-        ))}
+        </div>
       </div>
-    </div>
   );
 };
 
