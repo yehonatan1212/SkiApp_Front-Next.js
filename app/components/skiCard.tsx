@@ -109,19 +109,16 @@ const SkiCard: React.FC<skiCardProps> = ({ ski, onDelete, onUpdate }) => {
         <div>
           <SkiLevelScale minLevel={ski.ski_level_min} maxLevel={ski.ski_level_max} />
         </div>
-
         <div>
           <TerrainScale terrain={ski.on_piste_vs_off_piste} />
         </div>
-
+        
         <div>
-          <h1>Height Difference:</h1>
-          <HeightDifference heightDifference={ski.height_difference} />
+          <ContactLength length={ski.length} contactLength={ski.contact_length} />
         </div>
 
         <div>
-          <h1>Camberlength :</h1>
-          <ContactLength length={ski.length} contactLength={ski.contact_length} />
+          <HeightDifference height_difference={ski.height_difference} />
         </div>
 
         <div>

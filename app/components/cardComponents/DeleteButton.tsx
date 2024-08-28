@@ -8,7 +8,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ onDelete }) => {
   return (
     <button
       onClick={onDelete}
-      className="text-red-500 hover:text-red-700 pr-20"
+      className="text-red-500 hover:text-red-700 pr-2"
     >
       <div className="flex flex-row items-center space-x-1">
       <svg 

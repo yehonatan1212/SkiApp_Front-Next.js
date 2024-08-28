@@ -8,7 +8,7 @@ const EditButton: React.FC<EditButtonProps> = ({ onEdit }) => {
   return (
     <button 
     onClick={onEdit}
-    className="text-gray-400 hover:text-blue-700 pr-20"
+    className="text-gray-400 hover:text-blue-700 pr-2"
   >
     <div className="flex flex-row items-center space-x-1"> 
       <svg 

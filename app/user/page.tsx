@@ -71,7 +71,7 @@ const UserPage = () => {
   };
 
   return (
-    <div className="w-full mx-auto max-w-[850px] bg-white p-8 rounded-lg text-xs md:text-sm">
+    <div className="w-full mx-auto max-w-[700px] bg-white p-8 rounded-lg text-xs md:text-sm">
       <h1 className="text-3xl font-bold mb-6">Your Skis</h1>
       <button
         onClick={handleAddSki}
