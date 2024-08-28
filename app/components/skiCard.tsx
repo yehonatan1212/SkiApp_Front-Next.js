@@ -107,12 +107,10 @@ const SkiCard: React.FC<skiCardProps> = ({ ski, onDelete, onUpdate }) => {
         
       <div className="card-body">
         <div>
-          <h1>Ski Level</h1>
           <SkiLevelScale minLevel={ski.ski_level_min} maxLevel={ski.ski_level_max} />
         </div>
 
         <div>
-          <h1>Ski Terrain</h1>
           <TerrainScale terrain={ski.on_piste_vs_off_piste} />
         </div>
 
